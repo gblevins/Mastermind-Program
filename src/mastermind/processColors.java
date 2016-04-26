@@ -1,17 +1,18 @@
 package mastermind;
+
+import java.awt.Color;
+
 /*
  * GENERAL NOTES
  * make the default color the same color as the background for a cleaner look
  * could we possibly make the buttons the color they represent?
  */
 
-import java.awt.Color;
-
 public class processColors {
 	public static Color purple = new Color(160, 32, 240);
 	
 	
-	public static Color processHistory(int colorInt){
+	public static Color processHistory(int colorInt) {
 		if(colorInt == 0)
 		{
 			return Color.blue;
@@ -83,6 +84,5 @@ public class processColors {
 			System.err.println("You have an issue with randToColor");
 			return 6;
 		}
-	}
-	
+	}	
 }
