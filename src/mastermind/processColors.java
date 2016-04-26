@@ -8,7 +8,7 @@ package mastermind;
 import java.awt.Color;
 
 public class processColors {
-	Color purple = new Color(160, 32, 240);
+	public static Color purple = new Color(160, 32, 240);
 	
 	
 	public static Color processHistory(int colorInt){
