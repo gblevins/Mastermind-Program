@@ -57,7 +57,7 @@ public class MyApplication extends Application {
 	private void scene2Init() {
 		// the game board
 		Rectangle board = new Rectangle(250, 25, 375, 625);
-		board.setFill(Color.DEEPPINK);
+		board.setFill(Color.ALICEBLUE);
 		root2 = new Group(board);
 		scene2 = new Scene(root2);
 
@@ -243,6 +243,7 @@ public class MyApplication extends Application {
 		checkButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Check Button Pressed.");
+				
 			}
 		});
 
@@ -264,6 +265,13 @@ public class MyApplication extends Application {
 		resetButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Reset Button Pressed.");
+				game = new Mastermind();
+				scene2Init();
+				try {
+					start(stage);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -281,7 +289,7 @@ public class MyApplication extends Application {
 		root2.getChildren().add(resetButton);
 		root2.getChildren().add(quitButton);
 	}
-	
+
 	// initialize the slots and labels
 	private void slotsAndLabelsInit() {
 		// the code slots
