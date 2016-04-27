@@ -13,31 +13,76 @@ import javafx.scene.shape.*;
 import javafx.scene.control.Button;
 
 public class MyApplication extends Application {
-	Button blueButton;
-	Button greenButton;
-	Button orangeButton;
-	Button purpleButton;
-	Button redButton;
-	Button yellowButton;
+	// the color buttons
+	private Button blueButton, greenButton, orangeButton, purpleButton, redButton, yellowButton,
+	// the operation buttons
+	startButton, checkButton, backButton, resetButton, quitButton, restartButton;
 
-	Button startButton;
-	Button checkButton;
-	Button backButton;
-	Button resetButton;
-	Button quitButton;
-	
-	Mastermind game;
-	Group root;
-	Stage stage;
+	// the game board and operations
+	private Mastermind game;
+	// three roots make 3 scenes, start, play, game over 
+	private Group root1, root2, root3;
+	private Scene scene1, scene2, scene3;
+	// the current stage being displayed
+	private Stage stage;
 
-	// initialize the buttons
+	// initialize
 	@Override
 	public void init() throws Exception {
+		// initialize the game
 		game = new Mastermind();
+		
+		// initialize scenes
+		scene1Init();
+		scene2Init();
+		scene3Init();
+	}
+	
+	// initialize the first scene, the start screen
+	private void scene1Init() {
+		startButton = new Button("Start");
+		startButton.setLayoutX(20);
+		startButton.setLayoutY(300);
+		startButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Start Button Pressed.");
+				stage.setScene(scene2);
+			}
+		});
+		root1 = new Group(startButton);
+		scene1 = new Scene(root1);
+	}
+	
+	// initialize the second scene, the game screen
+	private void scene2Init() {
+		// the game board
 		Rectangle board = new Rectangle(250, 25, 375, 625);
 		board.setFill(Color.DEEPPINK);
-		root = new Group(board);
+		root2 = new Group(board);
+		scene2 = new Scene(root2);
 
+		// initialize the color buttons
+		colorButtonsInit();
+		menuButtonsInit();
+		slotsAndLabelsInit();
+	}
+	
+	// initialize the third screen, game over
+	private void scene3Init() {
+		restartButton = new Button("Restart");
+		restartButton.setLayoutX(20);
+		restartButton.setLayoutY(300);
+		restartButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Restart Button Pressed.");
+			}
+		});
+		root3 = new Group(restartButton);
+		scene3 = new Scene(root3);
+	}
+
+	// initialize the color buttons for the game board
+	private void colorButtonsInit() {
 		blueButton = new Button();
 		blueButton.setStyle(
 				"-fx-background-radius: 5em; " +
@@ -55,7 +100,7 @@ public class MyApplication extends Application {
 				// TODO handle how the input will be processed
 				if (game.setInput(0)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.BLUE);
-					root.getChildren().add(circle);
+					root2.getChildren().add(circle);
 					stage.show();
 				}
 				else {
@@ -82,9 +127,9 @@ public class MyApplication extends Application {
 		greenButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Green Button pressed.");
-				if (game.setInput(0)) {
+				if (game.setInput(1)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.GREEN);
-					root.getChildren().add(circle);
+					root2.getChildren().add(circle);
 					stage.show();
 				}
 				else {
@@ -107,9 +152,9 @@ public class MyApplication extends Application {
 		orangeButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Orange Button pressed.");
-				if (game.setInput(0)) {
+				if (game.setInput(2)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.ORANGE);
-					root.getChildren().add(circle);
+					root2.getChildren().add(circle);
 					stage.show();
 				}
 				else {
@@ -132,9 +177,9 @@ public class MyApplication extends Application {
 		purpleButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Purple Button pressed.");
-				if (game.setInput(0)) {
+				if (game.setInput(3)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.PURPLE);
-					root.getChildren().add(circle);
+					root2.getChildren().add(circle);
 					stage.show();
 				}
 				else {
@@ -157,9 +202,9 @@ public class MyApplication extends Application {
 		redButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Red Button pressed.");
-				if (game.setInput(0)) {
+				if (game.setInput(4)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.RED);
-					root.getChildren().add(circle);
+					root2.getChildren().add(circle);
 					stage.show();
 				}
 				else {
@@ -182,9 +227,9 @@ public class MyApplication extends Application {
 		yellowButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Yellow Button pressed.");
-				if (game.setInput(0)) {
+				if (game.setInput(5)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.YELLOW);
-					root.getChildren().add(circle);
+					root2.getChildren().add(circle);
 					stage.show();
 				}
 				else {
@@ -193,15 +238,16 @@ public class MyApplication extends Application {
 			}
 		});
 
-		startButton = new Button("Start");
-		startButton.setLayoutX(20);
-		startButton.setLayoutY(300);
-		startButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent e) {
-				System.out.println("Start Button Pressed.");
-			}
-		});
+		root2.getChildren().add(blueButton);
+		root2.getChildren().add(greenButton);
+		root2.getChildren().add(orangeButton);
+		root2.getChildren().add(purpleButton);
+		root2.getChildren().add(redButton);
+		root2.getChildren().add(yellowButton);
+	}
 
+	// initialize the menu buttons for the game board
+	private void menuButtonsInit() {
 		checkButton = new Button("Check");
 		checkButton.setLayoutX(20);
 		checkButton.setLayoutY(330);
@@ -210,7 +256,7 @@ public class MyApplication extends Application {
 				System.out.println("Check Button Pressed.");
 			}
 		});
-		
+
 		backButton = new Button("Back");
 		backButton.setLayoutX(20);
 		backButton.setLayoutY(360);
@@ -237,65 +283,56 @@ public class MyApplication extends Application {
 				System.out.println("Quit Button Pressed.");
 			}
 		});
+		
+		root2.getChildren().add(checkButton);
+		root2.getChildren().add(backButton);
+		root2.getChildren().add(resetButton);
+		root2.getChildren().add(quitButton);
 	}
-
-	@Override
-	public void start(Stage primaryStage) throws Exception {
-		// the board
-		//Rectangle board = new Rectangle(250, 25, 375, 625);
-		//board.setFill(Color.DEEPPINK);
-		//Group root = new Group(board);
-		//root = new Group(board);
-		// the buttons (have already been initialized
-		root.getChildren().add(blueButton);
-		root.getChildren().add(greenButton);
-		root.getChildren().add(orangeButton);
-		root.getChildren().add(purpleButton);
-		root.getChildren().add(redButton);
-		root.getChildren().add(yellowButton);
-		root.getChildren().add(startButton);
-		root.getChildren().add(checkButton);
-		root.getChildren().add(backButton);
-		root.getChildren().add(resetButton);
-		root.getChildren().add(quitButton);
-		// the slots
+	
+	// initialize the slots and labels
+	private void slotsAndLabelsInit() {
+		// the code slots
 		for (int k = 0; k < 12; k ++) {
 			for (int j = 0; j < 4; j++) {
 				Circle circle = new Circle(300 + (j * 40), 575 - (k * 40), 15, Color.DARKGREY);
-				root.getChildren().add(circle);
+				root2.getChildren().add(circle);
 			}
 		}
-		// the info slots
+		// the code info slots
 		for (int k = 0; k < 12; k ++) {
 			for (int j = 0; j < 4; j++) {
 				Circle circle = new Circle(450 + (j * 25), 575 - (k * 40), 10, Color.LIGHTGREY);
-				root.getChildren().add(circle);
+				root2.getChildren().add(circle);
 			}
 		}
 		// the hidden code slots
 		for (int x = 0; x < 4; x++) {
 			Circle circle = new Circle(300 + (x * 40), 95, 15, Color.ANTIQUEWHITE);
-			root.getChildren().add(circle);
+			root2.getChildren().add(circle);
 		}
 		// hidden code labels
 		for (int y = 0; y < 4; y++) {
 			Text t = new Text(295 + (y * 40), 104, "?");
 			t.setFont(new Font(25));
-			root.getChildren().add(t);
+			root2.getChildren().add(t);
 		}
 		// the attempt labels
 		for (int i = 0; i < 12; i++) {
 			Integer num = i + 1;
 			Text t = new Text(550, 585 - (40 * i), num.toString());
 			t.setFont(new Font(20));
-			root.getChildren().add(t);
+			root2.getChildren().add(t);
 		}
-		Scene scene = new Scene(root);
+	}
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		stage = primaryStage;
 		primaryStage.setWidth(1000);
 		primaryStage.setHeight(700);
 		primaryStage.setTitle("Mastermind Application");
-		primaryStage.setScene(scene);
+		primaryStage.setScene(scene1);
 		primaryStage.show();
-		stage = primaryStage;
 	}
 }
