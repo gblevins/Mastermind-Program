@@ -10,7 +10,9 @@ public class Mastermind
 	private int[] pegsArray = new int[48];
 	private int[] secretCode = new int[4];
 
+	// 12 rows, so this ranges from 0 to 11
 	private int currentRow = 0;
+	// 4 columns, so this ranges from 0 to 3
 	private int currentColumn = 0;
 
 	Mastermind () {
@@ -66,6 +68,17 @@ public class Mastermind
 			return false;
 		historyArray[(currentRow * 4) + currentColumn] = input;
 		currentColumn++;
+		return true;
+	}
+	
+	// remove the most recent input from the board
+	public boolean removeLastInput() {
+		// not any input on current column yet
+		if (currentColumn == 0) {
+			return false;
+		}
+		historyArray[(currentRow * 4) + currentColumn] = -1;
+		currentColumn--;
 		return true;
 	}
 

@@ -97,19 +97,13 @@ public class MyApplication extends Application {
 		blueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Blue Button pressed.");
-				// TODO handle how the input will be processed
 				if (game.setInput(0)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.BLUE);
 					root2.getChildren().add(circle);
-					stage.show();
 				}
 				else {
 					System.out.println("Max code size reached");
 				}
-				// draw on the board
-				// change the arrays
-				// see if a complete guess
-				// check if correct guess
 			}
 		});
 
@@ -130,7 +124,6 @@ public class MyApplication extends Application {
 				if (game.setInput(1)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.GREEN);
 					root2.getChildren().add(circle);
-					stage.show();
 				}
 				else {
 					System.out.println("Max code size reached");
@@ -155,7 +148,6 @@ public class MyApplication extends Application {
 				if (game.setInput(2)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.ORANGE);
 					root2.getChildren().add(circle);
-					stage.show();
 				}
 				else {
 					System.out.println("Max code size reached");
@@ -180,7 +172,6 @@ public class MyApplication extends Application {
 				if (game.setInput(3)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.PURPLE);
 					root2.getChildren().add(circle);
-					stage.show();
 				}
 				else {
 					System.out.println("Max code size reached");
@@ -205,7 +196,6 @@ public class MyApplication extends Application {
 				if (game.setInput(4)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.RED);
 					root2.getChildren().add(circle);
-					stage.show();
 				}
 				else {
 					System.out.println("Max code size reached");
@@ -230,7 +220,6 @@ public class MyApplication extends Application {
 				if (game.setInput(5)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.YELLOW);
 					root2.getChildren().add(circle);
-					stage.show();
 				}
 				else {
 					System.out.println("Max code size reached");
@@ -263,6 +252,9 @@ public class MyApplication extends Application {
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Back Button Pressed.");
+				if (game.removeLastInput()) {
+					root2.getChildren().remove(root2.getChildren().size() - 1);
+				}
 			}
 		});
 
