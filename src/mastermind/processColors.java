@@ -10,7 +10,7 @@ import java.awt.Color;
 
 public class processColors {
 	public static Color purple = new Color(160, 32, 240);
-	
+
 	public static Color processHistory(int colorInt) {
 		if(colorInt == 0)
 		{
