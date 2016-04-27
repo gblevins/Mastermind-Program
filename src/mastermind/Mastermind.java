@@ -6,12 +6,18 @@ package mastermind;
 
 public class Mastermind 
 {
-	int[] historyArray  = new int[48];
-	int[] pegsArray = new int[48];
-	int[] secretCode = new int[4];
+	private int[] historyArray  = new int[48];
+	private int[] pegsArray = new int[48];
+	private int[] secretCode = new int[4];
 
-	int currentRow = 0;
+	private int currentRow = 0;
+	private int currentColumn = 0;
 
+	Mastermind () {
+		initBoard();
+		makeSecretCode();
+	}
+	
 	//initializes both the history and pegs
 	public void initBoard()
 	{
@@ -42,6 +48,25 @@ public class Mastermind
 		initBoard();
 		makeSecretCode();
 		currentRow = 0;
+	}
+	
+	public int getRow() {
+		return currentRow;
+	}
+	
+	public int getCol() {
+		return currentColumn;
+	}
+	
+	// returns true if a guess is successfully entered, false otherwise
+	public boolean setInput(int input)
+	{
+		// check if 4 guesses have already been made
+		if (currentColumn == 4)
+			return false;
+		historyArray[(currentRow * 4) + currentColumn] = input;
+		currentColumn++;
+		return true;
 	}
 
 	/*
