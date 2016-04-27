@@ -1,6 +1,8 @@
 package mastermind;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -15,7 +17,7 @@ public class MyApplication extends Application {
 	Button blueButton;
 	Button blackButton;
 	Button greenButton;
-	
+
 	// initialize the buttons
 	@Override
 	public void init() throws Exception {
@@ -30,6 +32,11 @@ public class MyApplication extends Application {
 		);
 		redButton.setLayoutX(290);
 		redButton.setLayoutY(600);
+		redButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Red Button pressed.");
+			}
+		});
 
 		blueButton = new Button();
 		blueButton.setStyle(
@@ -42,6 +49,11 @@ public class MyApplication extends Application {
 		);
 		blueButton.setLayoutX(325);
 		blueButton.setLayoutY(600);
+		blueButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Blue Button pressed.");
+			}
+		});
 
 		blackButton = new Button();
 		blackButton.setStyle(
@@ -54,6 +66,11 @@ public class MyApplication extends Application {
 		);
 		blackButton.setLayoutX(360);
 		blackButton.setLayoutY(600);
+		blackButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Black Button pressed.");
+			}
+		});
 
 		greenButton = new Button();
 		greenButton.setStyle(
@@ -66,6 +83,11 @@ public class MyApplication extends Application {
 		);
 		greenButton.setLayoutX(395);
 		greenButton.setLayoutY(600);
+		greenButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Green Button pressed.");
+			}
+		});
 	}
 
 	@Override
