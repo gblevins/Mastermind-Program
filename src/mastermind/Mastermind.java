@@ -9,19 +9,19 @@ public class Mastermind
 	int[] historyArray  = new int[48];
 	int[] pegsArray = new int[48];
 	int[] secretCode = new int[4];
-	
+
 	int currentRow = 0;
-	
+
 	//initializes both the history and pegs
 	public void initBoard()
 	{
 		for(int i = 0; i< 48; i++)
 		{
-			historyArray[i] = -1;			//setting it to -1 sets it to the default color
+			historyArray[i] = -1;	//setting it to -1 sets it to the default color
 			pegsArray[i] = -1;
 		}
 	}
-	
+
 	//generates the secret code
 	public void makeSecretCode()
 	{
@@ -34,7 +34,7 @@ public class Mastermind
 		randInt = (int)(Math.random()*600);
 		secretCode[3] = processColors.randToColor(randInt);
 	}
-	
+
 	//resets the board when the game is over/when you want to start over
 	//WHAT HAPPENS WHEN YOU HIT THE RESET BUTTON
 	public void resetBoard()
@@ -43,7 +43,7 @@ public class Mastermind
 		makeSecretCode();
 		currentRow = 0;
 	}
-	
+
 	/*
 	 * WHAT HAPPENS WHEN YOU PRESS THE CHECK BUTTON
 	 * returns whether or not you have won the game
@@ -51,7 +51,7 @@ public class Mastermind
 	 * updates the peg array
 	 * updates current row
 	 */
-	
+
 	public boolean checkInput()
 	{	int[] tempSecretCode = secretCode;
 		int[] currentGuess = new int[4];
@@ -77,7 +77,7 @@ public class Mastermind
 				currentPegIndex++;
 			}
 		}
-		
+
 		//find the white pegs
 		for(int i = 0; i<4; i++)
 		{
@@ -90,14 +90,14 @@ public class Mastermind
 				currentPegIndex++;
 			}
 		}
-		
+
 		pegsArray[currentRow*4] = currentPegs[0];
 		pegsArray[currentRow*4+1] = currentPegs[1];
 		pegsArray[currentRow*4+2] = currentPegs[2];
 		pegsArray[currentRow*4+3] = currentPegs[3];
-		
+
 		currentRow++;
-		
+
 		//quick error check
 		if(whiteCount+blackCount >4)
 		{
@@ -108,9 +108,8 @@ public class Mastermind
 			return true;
 		}
 		return false;
-		
 	}
-	
+
 	public boolean contains(int value, int[] intArray)
 	{
 		for(int i = 0; i<intArray.length;i++){

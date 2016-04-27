@@ -13,31 +13,16 @@ import javafx.scene.shape.*;
 import javafx.scene.control.Button;
 
 public class MyApplication extends Application {
-	Button redButton;
 	Button blueButton;
-	Button blackButton;
 	Button greenButton;
+	Button orangeButton;
+	Button purpleButton;
+	Button redButton;
+	Button yellowButton;
 
 	// initialize the buttons
 	@Override
 	public void init() throws Exception {
-		redButton = new Button();
-		redButton.setStyle(
-				"-fx-background-radius: 5em; " +
-				"-fx-min-width: 30px; " +
-				"-fx-min-height: 30px; " +
-				"-fx-max-width: 30px; " +
-				"-fx-max-height: 30px;" +
-				"-fx-background-color: #FF0000;"
-		);
-		redButton.setLayoutX(290);
-		redButton.setLayoutY(600);
-		redButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent e) {
-				System.out.println("Red Button pressed.");
-			}
-		});
-
 		blueButton = new Button();
 		blueButton.setStyle(
 				"-fx-background-radius: 5em; " +
@@ -47,28 +32,12 @@ public class MyApplication extends Application {
 				"-fx-max-height: 30px;" +
 				"-fx-background-color: #0000ff;"
 		);
-		blueButton.setLayoutX(325);
+		blueButton.setLayoutX(290);
 		blueButton.setLayoutY(600);
 		blueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Blue Button pressed.");
-			}
-		});
-
-		blackButton = new Button();
-		blackButton.setStyle(
-				"-fx-background-radius: 5em; " +
-				"-fx-min-width: 30px; " +
-				"-fx-min-height: 30px; " +
-				"-fx-max-width: 30px; " +
-				"-fx-max-height: 30px;" +
-				"-fx-background-color: #000000;"
-		);
-		blackButton.setLayoutX(360);
-		blackButton.setLayoutY(600);
-		blackButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent e) {
-				System.out.println("Black Button pressed.");
+				// TODO handle how the input will be processed
 			}
 		});
 
@@ -81,11 +50,79 @@ public class MyApplication extends Application {
 				"-fx-max-height: 30px;" +
 				"-fx-background-color: #008000;"
 		);
-		greenButton.setLayoutX(395);
+		greenButton.setLayoutX(325);
 		greenButton.setLayoutY(600);
 		greenButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Green Button pressed.");
+			}
+		});
+
+		orangeButton = new Button();
+		orangeButton.setStyle(
+				"-fx-background-radius: 5em; " +
+				"-fx-min-width: 30px; " +
+				"-fx-min-height: 30px; " +
+				"-fx-max-width: 30px; " +
+				"-fx-max-height: 30px;" +
+				"-fx-background-color: #ffa500;"
+		);
+		orangeButton.setLayoutX(360);
+		orangeButton.setLayoutY(600);
+		orangeButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Orange Button pressed.");
+			}
+		});
+
+		purpleButton = new Button();
+		purpleButton.setStyle(
+				"-fx-background-radius: 5em; " +
+				"-fx-min-width: 30px; " +
+				"-fx-min-height: 30px; " +
+				"-fx-max-width: 30px; " +
+				"-fx-max-height: 30px;" +
+				"-fx-background-color: #800080;"
+		);
+		purpleButton.setLayoutX(395);
+		purpleButton.setLayoutY(600);
+		purpleButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Purple Button pressed.");
+			}
+		});
+		
+		redButton = new Button();
+		redButton.setStyle(
+				"-fx-background-radius: 5em; " +
+				"-fx-min-width: 30px; " +
+				"-fx-min-height: 30px; " +
+				"-fx-max-width: 30px; " +
+				"-fx-max-height: 30px;" +
+				"-fx-background-color: #ff0000;"
+		);
+		redButton.setLayoutX(430);
+		redButton.setLayoutY(600);
+		redButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Red Button pressed.");
+			}
+		});
+		
+		yellowButton = new Button();
+		yellowButton.setStyle(
+				"-fx-background-radius: 5em; " +
+				"-fx-min-width: 30px; " +
+				"-fx-min-height: 30px; " +
+				"-fx-max-width: 30px; " +
+				"-fx-max-height: 30px;" +
+				"-fx-background-color: #ffff00;"
+		);
+		yellowButton.setLayoutX(465);
+		yellowButton.setLayoutY(600);
+		yellowButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Yellow Button pressed.");
 			}
 		});
 	}
@@ -97,10 +134,12 @@ public class MyApplication extends Application {
 		board.setFill(Color.DEEPPINK);
 		Group root = new Group(board);
 		// the buttons (have already been initialized
-		root.getChildren().add(redButton);
 		root.getChildren().add(blueButton);
-		root.getChildren().add(blackButton);
 		root.getChildren().add(greenButton);
+		root.getChildren().add(orangeButton);
+		root.getChildren().add(purpleButton);
+		root.getChildren().add(redButton);
+		root.getChildren().add(yellowButton);
 		// the slots
 		for (int k = 0; k < 12; k ++) {
 			for (int j = 0; j < 4; j++) {
