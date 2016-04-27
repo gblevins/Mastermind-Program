@@ -22,6 +22,7 @@ public class MyApplication extends Application {
 
 	Button startButton;
 	Button checkButton;
+	Button backButton;
 	Button resetButton;
 	Button quitButton;
 	
@@ -36,7 +37,7 @@ public class MyApplication extends Application {
 		Rectangle board = new Rectangle(250, 25, 375, 625);
 		board.setFill(Color.DEEPPINK);
 		root = new Group(board);
-		
+
 		blueButton = new Button();
 		blueButton.setStyle(
 				"-fx-background-radius: 5em; " +
@@ -56,6 +57,9 @@ public class MyApplication extends Application {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.BLUE);
 					root.getChildren().add(circle);
 					stage.show();
+				}
+				else {
+					System.out.println("Max code size reached");
 				}
 				// draw on the board
 				// change the arrays
@@ -78,6 +82,14 @@ public class MyApplication extends Application {
 		greenButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Green Button pressed.");
+				if (game.setInput(0)) {
+					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.GREEN);
+					root.getChildren().add(circle);
+					stage.show();
+				}
+				else {
+					System.out.println("Max code size reached");
+				}
 			}
 		});
 
@@ -95,6 +107,14 @@ public class MyApplication extends Application {
 		orangeButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Orange Button pressed.");
+				if (game.setInput(0)) {
+					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.ORANGE);
+					root.getChildren().add(circle);
+					stage.show();
+				}
+				else {
+					System.out.println("Max code size reached");
+				}
 			}
 		});
 
@@ -112,6 +132,14 @@ public class MyApplication extends Application {
 		purpleButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Purple Button pressed.");
+				if (game.setInput(0)) {
+					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.PURPLE);
+					root.getChildren().add(circle);
+					stage.show();
+				}
+				else {
+					System.out.println("Max code size reached");
+				}
 			}
 		});
 
@@ -129,6 +157,14 @@ public class MyApplication extends Application {
 		redButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Red Button pressed.");
+				if (game.setInput(0)) {
+					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.RED);
+					root.getChildren().add(circle);
+					stage.show();
+				}
+				else {
+					System.out.println("Max code size reached");
+				}
 			}
 		});
 
@@ -146,6 +182,14 @@ public class MyApplication extends Application {
 		yellowButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Yellow Button pressed.");
+				if (game.setInput(0)) {
+					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.YELLOW);
+					root.getChildren().add(circle);
+					stage.show();
+				}
+				else {
+					System.out.println("Max code size reached");
+				}
 			}
 		});
 
@@ -166,10 +210,19 @@ public class MyApplication extends Application {
 				System.out.println("Check Button Pressed.");
 			}
 		});
+		
+		backButton = new Button("Back");
+		backButton.setLayoutX(20);
+		backButton.setLayoutY(360);
+		backButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override public void handle(ActionEvent e) {
+				System.out.println("Back Button Pressed.");
+			}
+		});
 
 		resetButton = new Button("Reset");
 		resetButton.setLayoutX(20);
-		resetButton.setLayoutY(360);
+		resetButton.setLayoutY(390);
 		resetButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Reset Button Pressed.");
@@ -178,7 +231,7 @@ public class MyApplication extends Application {
 
 		quitButton = new Button("Quit");
 		quitButton.setLayoutX(20);
-		quitButton.setLayoutY(390);
+		quitButton.setLayoutY(420);
 		quitButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Quit Button Pressed.");
@@ -202,6 +255,7 @@ public class MyApplication extends Application {
 		root.getChildren().add(yellowButton);
 		root.getChildren().add(startButton);
 		root.getChildren().add(checkButton);
+		root.getChildren().add(backButton);
 		root.getChildren().add(resetButton);
 		root.getChildren().add(quitButton);
 		// the slots
