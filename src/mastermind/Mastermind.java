@@ -90,13 +90,15 @@ public class Mastermind
 	 * updates current row
 	 */
 
-	public boolean checkInput()
+	public int[] checkInput()
 	{	int[] tempSecretCode = secretCode;
 		int[] currentGuess = new int[4];
 		int[] currentPegs = new int[4];
 		int currentPegIndex = 0;
 		int blackCount = 0;
 		int whiteCount = 0;
+		int[] blackWhiteCount = new int[2];
+		
 		//----nope----step 1: update history--> do we want to do this now or as the person is selecting?
 		currentGuess[0] = historyArray[currentRow*4];
 		currentGuess[1] = historyArray[currentRow*4+1];
@@ -141,6 +143,15 @@ public class Mastermind
 		{
 			System.err.println("You messed up the pegs processing. See the process input function.");
 		}
+		
+		blackWhiteCount[0] = blackCount;
+		blackWhiteCount[1] = whiteCount;
+		
+		return blackWhiteCount;
+	}
+		
+	public boolean checkWin(int blackCount){
+		
 		//step 3: determine if the guess is completely correct
 		if(blackCount==4){
 			return true;

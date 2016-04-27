@@ -34,7 +34,7 @@ public class processColors {
 		}
 		if(colorInt == 5)
 		{
-			return Color.orange;
+			return Color.yellow;
 		}
 		return Color.DARK_GRAY;
 	}
@@ -58,23 +58,23 @@ public class processColors {
 		{
 			return 0;
 		}
-		if(rand<100)
+		if(rand<200)
 		{
 			return 1;
 		}
-		if(rand<100)
+		if(rand<300)
 		{
 			return 2;
 		}
-		if(rand<100)
+		if(rand<400)
 		{
 			return 3;
 		}
-		if(rand<100)
+		if(rand<500)
 		{
 			return 4;
 		}
-		if(rand<100)
+		if(rand<600)
 		{
 			return 5;
 		}
