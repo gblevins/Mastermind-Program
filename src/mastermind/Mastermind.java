@@ -18,6 +18,7 @@ public class Mastermind
 	Mastermind () {
 		initBoard();
 		makeSecretCode();
+		System.out.println(secretCode);
 	}
 	
 	//initializes both the history and pegs
@@ -104,6 +105,7 @@ public class Mastermind
 		currentGuess[1] = historyArray[currentRow*4+1];
 		currentGuess[2] = historyArray[currentRow*4+2];
 		currentGuess[3] = historyArray[currentRow*4+3];
+		System.out.println(currentGuess);
 		//step 2: update pegs
 		//find the black pegs
 		for(int i = 0; i<4; i++)
