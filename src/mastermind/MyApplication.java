@@ -13,6 +13,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.shape.*;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class MyApplication extends Application {
 	// the color buttons
@@ -42,17 +44,26 @@ public class MyApplication extends Application {
 
 	// initialize the first scene, the start screen
 	private void scene1Init() {
+		Image pic = new Image("http://venturachamber.com/wp-content/uploads/2015/01/mastermind.jpg");
+		ImageView iv1 = new ImageView();
+        iv1.setImage(pic);
+        
+        root1 = new Group();
+        scene1 = new Scene(root1);
+        
+        root1.getChildren().add(iv1);
+        
 		startButton = new Button("Start");
-		startButton.setLayoutX(20);
-		startButton.setLayoutY(300);
+		startButton.setLayoutX(50);
+		startButton.setLayoutY(100);
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Start Button Pressed.");
 				stage.setScene(scene2);
 			}
 		});
-		root1 = new Group(startButton);
-		scene1 = new Scene(root1);
+		root1.getChildren().add(startButton);
+		
 	}
 
 	// initialize the second scene, the game screen
