@@ -139,6 +139,7 @@ public class Mastermind
 		pegsArray[currentRow*4+3] = currentPegs[3];
 
 		currentRow++;
+		currentColumn = 0;
 
 		//quick error check
 		if(whiteCount+blackCount >4)

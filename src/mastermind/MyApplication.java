@@ -37,7 +37,7 @@ public class MyApplication extends Application {
 		scene2Init();
 		scene3Init();
 	}
-	
+
 	// initialize the first scene, the start screen
 	private void scene1Init() {
 		startButton = new Button("Start");
@@ -52,7 +52,7 @@ public class MyApplication extends Application {
 		root1 = new Group(startButton);
 		scene1 = new Scene(root1);
 	}
-	
+
 	// initialize the second scene, the game screen
 	private void scene2Init() {
 		// the game board
@@ -66,7 +66,7 @@ public class MyApplication extends Application {
 		menuButtonsInit();
 		slotsAndLabelsInit();
 	}
-	
+
 	// initialize the third screen, game over
 	private void scene3Init() {
 		restartButton = new Button("Restart");
@@ -243,7 +243,21 @@ public class MyApplication extends Application {
 		checkButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Check Button Pressed.");
-				
+				int[] result = game.checkInput();
+				if (result[0] == 4) {
+					stage.setScene(scene3);
+				}
+				else {
+					int y;
+					for (y = 0; y < result[0]; y++){
+						Circle circle = new Circle(450 + (y * 25), 575 - (game.getRow() * 40), 10, Color.BLACK);
+						root2.getChildren().add(circle);
+					}
+					for (int g = y; g < result[1]; g++){
+						Circle circle = new Circle(450 + (g * 25), 575 - (game.getRow() * 40), 10, Color.WHITE);
+						root2.getChildren().add(circle);
+					}
+				}
 			}
 		});
 
