@@ -1,5 +1,7 @@
 package mastermind;
 
+import java.util.Arrays;
+
 /*
  * I guess this will be where the main driver of the game will be.
  */
@@ -18,7 +20,7 @@ public class Mastermind
 	Mastermind () {
 		initBoard();
 		makeSecretCode();
-		System.out.println(secretCode);
+		System.out.println(Arrays.toString(secretCode));
 	}
 	
 	//initializes both the history and pegs
@@ -92,20 +94,21 @@ public class Mastermind
 	 */
 
 	public int[] checkInput()
-	{	int[] tempSecretCode = secretCode;
+	{	int[] tempSecretCode = secretCode.clone();
 		int[] currentGuess = new int[4];
 		int[] currentPegs = new int[4];
 		int currentPegIndex = 0;
 		int blackCount = 0;
 		int whiteCount = 0;
 		int[] blackWhiteCount = new int[2];
-		
+
 		//----nope----step 1: update history--> do we want to do this now or as the person is selecting?
 		currentGuess[0] = historyArray[currentRow*4];
 		currentGuess[1] = historyArray[currentRow*4+1];
 		currentGuess[2] = historyArray[currentRow*4+2];
 		currentGuess[3] = historyArray[currentRow*4+3];
-		System.out.println(currentGuess);
+		System.out.println(Arrays.toString(currentGuess));
+		System.out.println(Arrays.toString(secretCode));
 		//step 2: update pegs
 		//find the black pegs
 		for(int i = 0; i<4; i++)

@@ -1,5 +1,7 @@
 package mastermind;
 
+import java.util.Arrays;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -244,17 +246,18 @@ public class MyApplication extends Application {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Check Button Pressed.");
 				int[] result = game.checkInput();
+				System.out.println(Arrays.toString(result));
 				if (result[0] == 4) {
 					stage.setScene(scene3);
 				}
 				else {
 					int y;
 					for (y = 0; y < result[0]; y++){
-						Circle circle = new Circle(450 + (y * 25), 575 - (game.getRow() * 40), 10, Color.BLACK);
+						Circle circle = new Circle(450 + (y * 25), 575 - ((game.getRow()-1) * 40), 10, Color.BLACK);
 						root2.getChildren().add(circle);
 					}
-					for (int g = y; g < result[1]; g++){
-						Circle circle = new Circle(450 + (g * 25), 575 - (game.getRow() * 40), 10, Color.WHITE);
+					for (int g = 0; g < result[1]; g++){
+						Circle circle = new Circle(450 + ((g+y) * 25), 575 - ((game.getRow()-1) * 40), 10, Color.WHITE);
 						root2.getChildren().add(circle);
 					}
 				}
