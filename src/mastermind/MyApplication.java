@@ -317,7 +317,7 @@ public class MyApplication extends Application {
 			root2.getChildren().add(t);
 		}
 	}
-	
+
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
