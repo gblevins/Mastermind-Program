@@ -22,6 +22,7 @@ public class Mastermind
 		initBoard();
 		makeSecretCode();
 		System.out.println(Arrays.toString(secretCode));
+		//timer.start();
 	}
 	
 	//initializes both the history and pegs

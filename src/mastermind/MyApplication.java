@@ -30,13 +30,14 @@ public class MyApplication extends Application {
 	private Scene scene1, scene2, scene3;
 	// the current stage being displayed
 	private Stage stage;
-	StopWatch timer = new StopWatch();
+	public StopWatch timer = new StopWatch();
 
 	// initialize
 	@Override
 	public void init() throws Exception {
 		// initialize the game
 		game = new Mastermind();
+		timer.start();
 		
 		// initialize scenes
 		scene1Init();
