@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+
 public class MyApplication extends Application {
 	// the color buttons
 	private Button blueButton, greenButton, orangeButton, purpleButton, redButton, yellowButton,
@@ -352,6 +353,10 @@ public class MyApplication extends Application {
 			t.setFont(new Font(20));
 			root2.getChildren().add(t);
 		}
+		//heading
+		Text t = new Text(315, 75, "MASTERMIND");
+		t.setFont(new Font(40));
+		root2.getChildren().add(t);
 	}
 
 	@Override
