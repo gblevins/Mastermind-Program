@@ -107,8 +107,8 @@ public class Mastermind
 		currentGuess[1] = historyArray[currentRow*4+1];
 		currentGuess[2] = historyArray[currentRow*4+2];
 		currentGuess[3] = historyArray[currentRow*4+3];
-		System.out.println(Arrays.toString(currentGuess));
-		System.out.println(Arrays.toString(secretCode));
+		//System.out.println(Arrays.toString(currentGuess));
+		//System.out.println(Arrays.toString(secretCode));
 		//step 2: update pegs
 		//find the black pegs
 		for(int i = 0; i<4; i++)
@@ -120,19 +120,26 @@ public class Mastermind
 				blackCount++;
 				currentPegs[currentPegIndex]= 7; //black
 				currentPegIndex++;
+				//System.out.println("black");
+				//System.out.println(Arrays.toString(currentGuess));
+				//System.out.println(Arrays.toString(tempSecretCode));
 			}
 		}
 
 		//find the white pegs
 		for(int i = 0; i<4; i++)
 		{
-			if((currentGuess[i]!=-1)&&contains(currentGuess[i],tempSecretCode))
+			if((currentGuess[i]!=-1)&&((contains(currentGuess[i],tempSecretCode))!=-1))
 			{
+				tempSecretCode[contains(currentGuess[i],tempSecretCode)] = -1;
 				currentGuess[i] = -1; //make sure it isn't counted twice
-				tempSecretCode[i] = -1;
 				whiteCount++;
 				currentPegs[currentPegIndex]= 6; //white
 				currentPegIndex++;
+				//System.out.println("white");
+				//System.out.println(Arrays.toString(currentGuess));
+				//System.out.println(Arrays.toString(tempSecretCode));
+
 			}
 		}
 
@@ -165,14 +172,14 @@ public class Mastermind
 		return false;
 	}
 
-	public boolean contains(int value, int[] intArray)
+	public int contains(int value, int[] intArray)
 	{
 		for(int i = 0; i<intArray.length;i++){
 			if(intArray[i] == value)
 			{
-				return true;
+				return i;
 			}
 		}
-		return false;
+		return -1;
 	}
 }
