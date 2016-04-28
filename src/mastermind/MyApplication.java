@@ -30,6 +30,7 @@ public class MyApplication extends Application {
 	private Scene scene1, scene2, scene3;
 	// the current stage being displayed
 	private Stage stage;
+	StopWatch timer = new StopWatch();
 
 	// initialize
 	@Override
@@ -60,6 +61,7 @@ public class MyApplication extends Application {
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Start Button Pressed.");
+				timer.start();
 				stage.setScene(scene2);
 			}
 		});
@@ -367,5 +369,18 @@ public class MyApplication extends Application {
 		primaryStage.setTitle("Mastermind Application");
 		primaryStage.setScene(scene1);
 		primaryStage.show();
+	}
+	
+	public String showTime(){
+		long currentTime = timer.getElapsedTime();
+		String timeStr;
+		if((currentTime/10)%100<10)
+		{
+			timeStr = "Time Elapsed: " + ((Long)(currentTime/1000)).toString()+".0"+ +((currentTime/10)%100)+"  seconds";
+		}
+		else{
+			timeStr = "Time Elapsed: " + ((Long)(currentTime/1000)).toString()+"."+ +((currentTime/10)%100)+"  seconds";
+			}
+		return timeStr;
 	}
 }
