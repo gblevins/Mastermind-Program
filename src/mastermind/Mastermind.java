@@ -17,6 +17,7 @@ public class Mastermind
 	// 4 columns, so this ranges from 0 to 3
 	private int currentColumn = 0;
 
+	//board constructor
 	Mastermind () {
 		initBoard();
 		makeSecretCode();
@@ -87,8 +88,7 @@ public class Mastermind
 
 	/*
 	 * WHAT HAPPENS WHEN YOU PRESS THE CHECK BUTTON
-	 * returns whether or not you have won the game
-	 * updates history array (not really)
+	 * returns number of black pegs and white pegs as an array [black, white]
 	 * updates the peg array
 	 * updates current row
 	 */
@@ -102,13 +102,12 @@ public class Mastermind
 		int whiteCount = 0;
 		int[] blackWhiteCount = new int[2];
 
-		//----nope----step 1: update history--> do we want to do this now or as the person is selecting?
+		//step 1: grab input from history
 		currentGuess[0] = historyArray[currentRow*4];
 		currentGuess[1] = historyArray[currentRow*4+1];
 		currentGuess[2] = historyArray[currentRow*4+2];
 		currentGuess[3] = historyArray[currentRow*4+3];
-		//System.out.println(Arrays.toString(currentGuess));
-		//System.out.println(Arrays.toString(secretCode));
+
 		//step 2: update pegs
 		//find the black pegs
 		for(int i = 0; i<4; i++)
@@ -120,9 +119,6 @@ public class Mastermind
 				blackCount++;
 				currentPegs[currentPegIndex]= 7; //black
 				currentPegIndex++;
-				//System.out.println("black");
-				//System.out.println(Arrays.toString(currentGuess));
-				//System.out.println(Arrays.toString(tempSecretCode));
 			}
 		}
 
@@ -136,9 +132,6 @@ public class Mastermind
 				whiteCount++;
 				currentPegs[currentPegIndex]= 6; //white
 				currentPegIndex++;
-				//System.out.println("white");
-				//System.out.println(Arrays.toString(currentGuess));
-				//System.out.println(Arrays.toString(tempSecretCode));
 
 			}
 		}
@@ -163,14 +156,10 @@ public class Mastermind
 		return blackWhiteCount;
 	}
 		
-	public boolean checkWin(int blackCount){
-		
-		//step 3: determine if the guess is completely correct
-		if(blackCount==4){
-			return true;
-		}
-		return false;
-	}
+	/*helper method for check win
+	 * Returns index of value within an array
+	 * if the value is not found, it returns -1
+	 */
 
 	public int contains(int value, int[] intArray)
 	{
