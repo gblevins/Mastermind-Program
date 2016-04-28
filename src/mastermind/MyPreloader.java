@@ -1,5 +1,11 @@
 package mastermind;
 
+/*
+ * Garret Blevins and Malvika Gupta
+ * 
+ * This is used to help load, and launch the application
+ */
+
 import javafx.application.Preloader;
 import javafx.application.Preloader.StateChangeNotification.Type;
 import javafx.scene.Scene;

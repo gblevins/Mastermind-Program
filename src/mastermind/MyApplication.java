@@ -1,6 +1,13 @@
 package mastermind;
 
-import java.util.Arrays;
+/*
+ * Garret Blevins and malvika Gupta
+ * 
+ * This class runs the applications
+ * handles the graphics
+ * accepts input
+ * provides output
+ */
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -16,21 +23,23 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-
 public class MyApplication extends Application {
 	// the color buttons
 	private Button blueButton, greenButton, orangeButton, purpleButton, redButton, yellowButton,
 	// the operation buttons
-	startButton, checkButton, backButton, resetButton, quitButton, restartButton;
+	startButton, checkButton, backButton, resetButton, quitButton;
 
 	// the game board and operations
 	private Mastermind game;
-	// three roots make 3 scenes, start, play, game over 
-	private Group root1, root2, root3;
-	private Scene scene1, scene2, scene3;
+	// three roots make 2 scenes, start, play 
+	private Group root1, root2;
+	private Scene scene1, scene2;
 	// the current stage being displayed
 	private Stage stage;
 	public StopWatch timer = new StopWatch();
+	
+	// tell if the game is over, if the game is over all buttons but reset and quit are turned off
+	boolean gameOver = false;
 
 	// initialize
 	@Override
@@ -42,23 +51,35 @@ public class MyApplication extends Application {
 		// initialize scenes
 		scene1Init();
 		scene2Init();
-		scene3Init();
 	}
 
 	// initialize the first scene, the start screen
 	private void scene1Init() {
+		// create a start menu picture
 		Image pic = new Image("http://venturachamber.com/wp-content/uploads/2015/01/mastermind.jpg");
 		ImageView iv1 = new ImageView();
         iv1.setImage(pic);
-        
+        iv1.setFitWidth(1000);
+        iv1.setPreserveRatio(true);
+        // start menu game text
+        Image pic2 = new Image("http://www.mapscoaching.kw.com/sites/all/themes/maps/images/masterminds.png");
+		ImageView iv2 = new ImageView();
+        iv2.setImage(pic2);
+        iv2.setFitWidth(400);
+        iv2.setPreserveRatio(true);
+        iv2.setX(300.0);
+        iv2.setY(300.0);
+        // build start scene
         root1 = new Group();
         scene1 = new Scene(root1);
-        
         root1.getChildren().add(iv1);
-        
+        root1.getChildren().add(iv2);
+        // initialize game start button
 		startButton = new Button("Start");
-		startButton.setLayoutX(50);
-		startButton.setLayoutY(100);
+		startButton.setMaxWidth(1000);
+		startButton.setLayoutX(400);
+		startButton.setLayoutY(500);
+		startButton.setStyle("-fx-padding: 50;");
 		startButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Start Button Pressed.");
@@ -67,7 +88,6 @@ public class MyApplication extends Application {
 			}
 		});
 		root1.getChildren().add(startButton);
-		
 	}
 
 	// initialize the second scene, the game screen
@@ -77,34 +97,15 @@ public class MyApplication extends Application {
 		board.setFill(Color.ALICEBLUE);
 		root2 = new Group(board);
 		scene2 = new Scene(root2);
-
 		// initialize the color buttons
 		colorButtonsInit();
 		menuButtonsInit();
 		slotsAndLabelsInit();
 	}
 
-	// initialize the third screen, game over
-	private void scene3Init() {
-		restartButton = new Button("Restart");
-		restartButton.setLayoutX(20);
-		restartButton.setLayoutY(300);
-		restartButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override public void handle(ActionEvent e) {
-				System.out.println("Restart Button Pressed.");
-			}
-		});
-		root3 = new Group(restartButton);
-		scene3 = new Scene(root3);
-		
-		//add elapsed time
-		Text t = new Text(315, 75, showTime());
-		t.setFont(new Font(40));
-		root3.getChildren().add(t);
-	}
-
 	// initialize the color buttons for the game board
 	private void colorButtonsInit() {
+		// initialize the color buttons
 		blueButton = new Button();
 		blueButton.setStyle(
 				"-fx-background-radius: 5em; " +
@@ -119,6 +120,7 @@ public class MyApplication extends Application {
 		blueButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Blue Button pressed.");
+				if (gameOver == true) return;
 				if (game.setInput(0)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.BLUE);
 					root2.getChildren().add(circle);
@@ -143,6 +145,7 @@ public class MyApplication extends Application {
 		greenButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Green Button pressed.");
+				if (gameOver == true) return;
 				if (game.setInput(1)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.GREEN);
 					root2.getChildren().add(circle);
@@ -167,6 +170,7 @@ public class MyApplication extends Application {
 		orangeButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Orange Button pressed.");
+				if (gameOver == true) return;
 				if (game.setInput(2)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.ORANGE);
 					root2.getChildren().add(circle);
@@ -191,6 +195,7 @@ public class MyApplication extends Application {
 		purpleButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Purple Button pressed.");
+				if (gameOver == true) return;
 				if (game.setInput(3)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.PURPLE);
 					root2.getChildren().add(circle);
@@ -215,6 +220,7 @@ public class MyApplication extends Application {
 		redButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Red Button pressed.");
+				if (gameOver == true) return;
 				if (game.setInput(4)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.RED);
 					root2.getChildren().add(circle);
@@ -239,6 +245,7 @@ public class MyApplication extends Application {
 		yellowButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Yellow Button pressed.");
+				if (gameOver == true) return;
 				if (game.setInput(5)) {
 					Circle circle = new Circle(300 + ((game.getCol() - 1) * 40), 575 - (game.getRow() * 40), 15, Color.YELLOW);
 					root2.getChildren().add(circle);
@@ -259,18 +266,53 @@ public class MyApplication extends Application {
 
 	// initialize the menu buttons for the game board
 	private void menuButtonsInit() {
+		// initialize menu buttons
+		// the check button is very important
+		// it makes sure that the number of guesses is right
+		// prints the black and white pegs
+		// checks if the player has won or loss and reacts accordingly
 		checkButton = new Button("Check");
 		checkButton.setLayoutX(20);
 		checkButton.setLayoutY(330);
 		checkButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Check Button Pressed.");
+				if (gameOver == true) return;
 				int[] result = game.checkInput();
-				//System.out.println(Arrays.toString(result));
-				if (result[0] == 4) {
-					stage.setScene(scene3);
+				if (result[0] == -1) {
+					System.out.println("Incorrect Code guess size.");
 				}
 				else {
+					if (result[0] == 4) {
+						gameOver = true;
+						int[] secretCode = game.getSecretCode();
+						for (int i = 0; i < 4; i++) {
+							Circle circle = new Circle(300 + (i * 40), 95, 15, processColors.processHistory(secretCode[i]));
+							root2.getChildren().add(circle);
+						}
+						Text t = new Text(20, 75, "YOU WIN!!!");
+						t.setFont(new Font(40));
+						root2.getChildren().add(t);
+						Text t2 = new Text(20, 175, showTime());
+						t2.setFont(new Font(30));
+						root2.getChildren().add(t2);
+					}
+
+					if (game.getRow() == 12) {
+						gameOver = true;
+						int[] secretCode = game.getSecretCode();
+						for (int i = 0; i < 4; i++) {
+							Circle circle = new Circle(300 + (i * 40), 95, 15, processColors.processHistory(secretCode[i]));
+							root2.getChildren().add(circle);
+						}
+						Text t = new Text(20, 75, "YOU LOSE!!!");
+						t.setFont(new Font(40));
+						root2.getChildren().add(t);
+						Text t2 = new Text(20, 175, showTime());
+						t2.setFont(new Font(30));
+						root2.getChildren().add(t2);
+					}
+
 					int y;
 					for (y = 0; y < result[0]; y++){
 						Circle circle = new Circle(450 + (y * 25), 575 - ((game.getRow()-1) * 40), 10, Color.BLACK);
@@ -290,6 +332,7 @@ public class MyApplication extends Application {
 		backButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Back Button Pressed.");
+				if (gameOver == true) return;
 				if (game.removeLastInput()) {
 					root2.getChildren().remove(root2.getChildren().size() - 1);
 				}
@@ -303,6 +346,8 @@ public class MyApplication extends Application {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Reset Button Pressed.");
 				game = new Mastermind();
+				gameOver = false;
+				timer.reset();
 				scene2Init();
 				try {
 					start(stage);
@@ -318,6 +363,7 @@ public class MyApplication extends Application {
 		quitButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Quit Button Pressed.");
+				System.exit(0);
 			}
 		});
 		
@@ -367,6 +413,7 @@ public class MyApplication extends Application {
 		root2.getChildren().add(t);
 	}
 
+	// sets the application up
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		stage = primaryStage;
@@ -377,15 +424,16 @@ public class MyApplication extends Application {
 		primaryStage.show();
 	}
 	
+	// returns the elapsed play time
 	public String showTime(){
 		long currentTime = timer.getElapsedTime();
 		String timeStr;
 		if((currentTime/10)%100<10)
 		{
-			timeStr = "Time Elapsed: " + ((Long)(currentTime/1000)).toString()+".0"+ +((currentTime/10)%100)+"  seconds";
+			timeStr = "Time Elapsed:\n" + ((Long)(currentTime/1000)).toString()+".0"+ +((currentTime/10)%100)+"  seconds";
 		}
 		else{
-			timeStr = "Time Elapsed: " + ((Long)(currentTime/1000)).toString()+"."+ +((currentTime/10)%100)+"  seconds";
+			timeStr = "Time Elapsed:\n" + ((Long)(currentTime/1000)).toString()+"."+ +((currentTime/10)%100)+"  seconds";
 			}
 		return timeStr;
 	}

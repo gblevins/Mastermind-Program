@@ -1,57 +1,60 @@
 package mastermind;
 
-import java.awt.Color;
-
 /*
- * GENERAL NOTES
- * make the default color the same color as the background for a cleaner look
- * could we possibly make the buttons the color they represent?
+ * Garret Blevins and Malvika Gupta
+ * 
+ * Used to simplify the use of different colors,
+ * converts integers to colors
  */
 
-public class processColors {
-	public static Color purple = new Color(160, 32, 240);
+import javafx.scene.paint.Color;
 
+public class processColors {
+
+	// turns the integer into a color
 	public static Color processHistory(int colorInt) {
 		if(colorInt == 0)
 		{
-			return Color.blue;
+			return Color.BLUE;
 		}
 		if(colorInt == 1)
 		{
-			return Color.green;
+			return Color.GREEN;
 		}
 		if(colorInt == 2)
 		{
-			return Color.orange;
+			return Color.ORANGE;
 		}
 		if(colorInt == 3)
 		{
-			return purple;
+			return Color.PURPLE;
 		}
 		if(colorInt == 4)
 		{
-			return Color.red;
+			return Color.RED;
 		}
 		if(colorInt == 5)
 		{
-			return Color.yellow;
+			return Color.YELLOW;
 		}
-		return Color.DARK_GRAY;
+		return Color.DARKGREY;
 	}
 
+	// turns the integer into a color
 	public static Color processPegs(int colorInt)
 	{
 		if(colorInt == 6)
 		{
-			return Color.white; 	//correct color, not the right place
+			return Color.WHITE; 	//correct color, not the right place
 		}
 		if(colorInt == 7)
 		{
-			return Color.black;		//correct color, correct place
+			return Color.BLACK;		//correct color, correct place
 		}
-		return Color.DARK_GRAY;
+		return Color.DARKGRAY;
 	}
 
+	// turns the integer into a color
 	public static int randToColor(int rand)
 	{
 		if(rand<100)

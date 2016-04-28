@@ -1,15 +1,23 @@
 package mastermind;
 
-import java.util.Arrays;
-
 /*
- * I guess this will be where the main driver of the game will be.
+ * Garret Blevins and Malvika Gupta
+ * 
+ * This all of the actual game logic,
+ * keeps track of the board
+ * makes secret code
+ * checks if game over
  */
+
+import java.util.Arrays;
 
 public class Mastermind 
 {
+	// guesses that have been entered
 	private int[] historyArray  = new int[48];
+	// info on the guesses
 	private int[] pegsArray = new int[48];
+	// the current secret code
 	private int[] secretCode = new int[4];
 
 	// 12 rows, so this ranges from 0 to 11
@@ -17,15 +25,14 @@ public class Mastermind
 	// 4 columns, so this ranges from 0 to 3
 	private int currentColumn = 0;
 
-	//board constructor
+	// board constructor
 	Mastermind () {
 		initBoard();
 		makeSecretCode();
 		System.out.println(Arrays.toString(secretCode));
-		//timer.start();
 	}
-	
-	//initializes both the history and pegs
+
+	// initializes both the history and pegs
 	public void initBoard()
 	{
 		for(int i = 0; i< 48; i++)
@@ -35,7 +42,7 @@ public class Mastermind
 		}
 	}
 
-	//generates the secret code
+	// generates the secret code
 	public void makeSecretCode()
 	{
 		int randInt = (int)(Math.random()*600);
@@ -57,10 +64,12 @@ public class Mastermind
 		currentRow = 0;
 	}
 	
+	// get the current row
 	public int getRow() {
 		return currentRow;
 	}
 	
+	// get the current column
 	public int getCol() {
 		return currentColumn;
 	}
@@ -93,9 +102,15 @@ public class Mastermind
 	 * updates the peg array
 	 * updates current row
 	 */
-
 	public int[] checkInput()
-	{	int[] tempSecretCode = secretCode.clone();
+	{
+		if (currentColumn != 4) {
+			int[] result = new int[2];
+			result[0] = -1;
+			result[1] = -1;
+			return result;
+		}
+		int[] tempSecretCode = secretCode.clone();
 		int[] currentGuess = new int[4];
 		int[] currentPegs = new int[4];
 		int currentPegIndex = 0;
@@ -162,9 +177,15 @@ public class Mastermind
 	 * if the value is not found, it returns -1
 	 */
 
+	// returns the current secret code
+	public int[] getSecretCode() {
+		return secretCode;
+	}
+	
+	// does the array contain the value
 	public int contains(int value, int[] intArray)
 	{
-		for(int i = 0; i<intArray.length;i++){
+		for(int i = 0; i < intArray.length;i++){
 			if(intArray[i] == value)
 			{
 				return i;
