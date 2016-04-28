@@ -95,6 +95,11 @@ public class MyApplication extends Application {
 		});
 		root3 = new Group(restartButton);
 		scene3 = new Scene(root3);
+		
+		//add elapsed time
+		Text t = new Text(315, 75, showTime());
+		t.setFont(new Font(40));
+		root3.getChildren().add(t);
 	}
 
 	// initialize the color buttons for the game board
@@ -260,7 +265,7 @@ public class MyApplication extends Application {
 			@Override public void handle(ActionEvent e) {
 				System.out.println("Check Button Pressed.");
 				int[] result = game.checkInput();
-				System.out.println(Arrays.toString(result));
+				//System.out.println(Arrays.toString(result));
 				if (result[0] == 4) {
 					stage.setScene(scene3);
 				}
